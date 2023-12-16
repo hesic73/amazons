@@ -26,6 +26,7 @@ public:
 	// debug
 	std::string string_repr();
 
+
 private:
 	const std::uint32_t num_cells;
 	int *board;

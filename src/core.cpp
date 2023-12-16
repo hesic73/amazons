@@ -24,24 +24,23 @@ static constexpr bool is_empty(const int *board, std::uint32_t size, std::uint32
 static bool piece_no_liberties(const int *board, std::uint32_t size, std::uint32_t x, std::uint32_t y)
 {
 	if (is_empty(board, size, x - 1, y))
-		return true;
+		return false;
 	if (is_empty(board, size, x - 1, y - 1))
-		return true;
+		return false;
 	if (is_empty(board, size, x - 1, y + 1))
-		return true;
+		return false;
 	if (is_empty(board, size, x, y - 1))
-		return true;
+		return false;
 	if (is_empty(board, size, x, y + 1))
-		return true;
+		return false;
 	if (is_empty(board, size, x + 1, y))
-		return true;
+		return false;
 	if (is_empty(board, size, x + 1, y - 1))
-		return true;
+		return false;
 	if (is_empty(board, size, x + 1, y + 1))
-		return true;
+		return false;
 	return true;
 }
-
 
 Amazons::Amazons(std::uint32_t size) : size(size), num_cells(size * size)
 {

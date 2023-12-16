@@ -1,0 +1,22 @@
+[build-system]
+requires = ["scikit_build_core[pyproject]", "pybind11"]
+build-backend = "scikit_build_core.build"
+
+[tool.scikit-build]
+cmake.source-dir = "src"
+
+[project]
+name = "Amazons"
+version = "0.0.0"
+authors = [{ name = "Sicheng He", email = "hesicheng20@gmail.com" }]
+description = "The Game of the Amazons"
+readme = "README.md"
+dependencies = ['numpy']
+
+
+[project.optional-dependencies]
+test = ["pytest"]
+gui = ["PyQt5"]
+
+[project.urls]
+Repository = "https://github.com/hesic73/Amazons.git"
