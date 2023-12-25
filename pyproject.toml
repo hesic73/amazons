@@ -1,22 +1,19 @@
 [build-system]
-requires = ["scikit_build_core[pyproject]", "pybind11"]
-build-backend = "scikit_build_core.build"
-
-[tool.scikit-build]
-cmake.source-dir = "src"
+requires = ["setuptools>=42", "wheel", "pybind11~=2.6.1"]
+build-backend = "setuptools.build_meta"
 
 [project]
-name = "Amazons"
+name = "amazons"
 version = "0.0.0"
 authors = [{ name = "Sicheng He", email = "hesicheng20@gmail.com" }]
 description = "The Game of the Amazons"
 readme = "README.md"
-dependencies = ['numpy']
+dependencies = ['numpy', 'pettingzoo']
 
 
-[project.optional-dependencies]
-test = ["pytest"]
-gui = ["PyQt5"]
+# [project.optional-dependencies]
+# test = ["pytest"]
+# gui = ["PyQt5"]
 
 [project.urls]
-Repository = "https://github.com/hesic73/Amazons.git"
+Repository = "https://github.com/hesic73/amazons.git"

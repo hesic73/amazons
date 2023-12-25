@@ -10,9 +10,9 @@ find_package(
   REQUIRED)
 
 find_package(pybind11 CONFIG REQUIRED)
-pybind11_add_module(amazons_core main.cpp core.cpp)
+pybind11_add_module(_amazons main.cpp core.cpp)
 
-target_compile_definitions(amazons_core
+target_compile_definitions(_amazons
                            PRIVATE VERSION_INFO=${PROJECT_VERSION})
 
-install(TARGETS amazons_core LIBRARY DESTINATION .)
+install(TARGETS _amazons LIBRARY DESTINATION .)

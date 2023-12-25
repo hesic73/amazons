@@ -1,6 +1,6 @@
 # Amazons
 
-[![](https://tokei.rs/b1/github/hesic73/Amazons)](https://github.com/hesic73/Amazons)
+[![](https://tokei.rs/b1/github/hesic73/amazons)](https://github.com/hesic73/amazons)
 
 ## Roadmap
 

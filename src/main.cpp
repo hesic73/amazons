@@ -39,12 +39,12 @@ public:
 #define STRINGIFY(x) #x
 #define MACRO_STRINGIFY(x) STRINGIFY(x)
 
-PYBIND11_MODULE(amazons_core, m)
+PYBIND11_MODULE(_amazons, m)
 {
     m.doc() = R"pbdoc(
         Pybind11 example plugin
         -----------------------
-        .. currentmodule:: amazons_core
+        .. currentmodule:: _amazons
         .. autosummary::
            :toctree: _generate
            add

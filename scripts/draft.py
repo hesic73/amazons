@@ -1,4 +1,4 @@
-from amazons_core import Amazons
+from _amazons import Amazons
 import numpy as np
 
 a = Amazons(10)
