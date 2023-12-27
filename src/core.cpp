@@ -179,9 +179,9 @@ std::string Amazons::string_repr()
 {
 	std::string s;
 	s.reserve(num_cells + size);
-	for (int i = 0; i < size; i++)
+	for (std::uint32_t i = 0; i < size; i++)
 	{
-		for (int j = 0; j < size; j++)
+		for (std::uint32_t j = 0; j < size; j++)
 		{
 			char c;
 

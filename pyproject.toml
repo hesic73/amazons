@@ -6,14 +6,15 @@ build-backend = "setuptools.build_meta"
 name = "amazons"
 version = "0.0.0"
 authors = [{ name = "Sicheng He", email = "hesicheng20@gmail.com" }]
+license = {text = "MIT License"}
 description = "The Game of the Amazons"
 readme = "README.md"
 dependencies = ['numpy', 'pettingzoo']
+classifiers = [
+    "Programming Language :: Python",
+    "License :: OSI Approved :: MIT License",
+]
 
-
-# [project.optional-dependencies]
-# test = ["pytest"]
-# gui = ["PyQt5"]
 
 [project.urls]
 Repository = "https://github.com/hesic73/amazons.git"

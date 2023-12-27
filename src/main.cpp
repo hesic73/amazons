@@ -31,7 +31,7 @@ public:
     py::memoryview get_board_view()
     {
         auto ptr = Amazons::get_board_view();
-        auto view=py::memoryview::from_buffer(ptr,{size, size}, {sizeof(int) * size, sizeof(int)});
+        auto view = py::memoryview::from_buffer(ptr, {size, size}, {sizeof(int) * size, sizeof(int)});
         return view;
     }
 };
@@ -41,24 +41,23 @@ public:
 
 PYBIND11_MODULE(_amazons, m)
 {
-    m.doc() = R"pbdoc(
-        Pybind11 example plugin
-        -----------------------
-        .. currentmodule:: _amazons
-        .. autosummary::
-           :toctree: _generate
-           add
-           subtract
-    )pbdoc";
 
-    py::class_<Amazons_np>(m, "Amazons")
-        .def(py::init<std::uint32_t>())
+    auto amazons = py::class_<Amazons_np>(m, "Amazons");
+
+    amazons.def(py::init<std::uint32_t>())
         .def("reset", &Amazons_np::reset)
         .def("step", &Amazons_np::step, py::arg("action"))
         .def_property("done", &Amazons_np::is_done, nullptr)
         .def("get_board_view", &Amazons_np::get_board_view)
         .def("get_board", &Amazons_np::get_board)
         .def("string_repr", &Amazons_np::string_repr);
+
+    py::enum_<Cell>(amazons, "Cell")
+        .value("Empty", Cell::Empty)
+        .value("Black", Cell::Black)
+        .value("White", Cell::White)
+        .value("Arrow", Cell::Arrow)
+        .export_values();
 
 #ifdef VERSION_INFO
     m.attr("__version__") = MACRO_STRINGIFY(VERSION_INFO);
