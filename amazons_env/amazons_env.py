@@ -8,7 +8,8 @@ from typing import Dict
 
 class AmazonsEnv(AECEnv):
     metadata = {
-        "name": "amazons_env_v0",
+        "render_modes": [],
+        "name": "amazons_v0",
     }
 
     def __init__(self, board_size: int = 10):
@@ -95,7 +96,8 @@ class AmazonsEnv(AECEnv):
         self.infos = self._convert_to_dict(
             [{} for _ in range(self.num_agents)])
 
-        self._last_obs = self.observe(self.agents[0])
+    def _encode_rewards(self, black_win: bool):
+        return [1, -1] if black_win else [-1, 1]
 
     def step(self, action: np.ndarray):
         if (
@@ -105,9 +107,26 @@ class AmazonsEnv(AECEnv):
             return self._was_dead_step(action)
 
         valid = self._env.step(action)
+        agent_id = self._name_to_int(self.agent_selection)
         if not valid:
-            return
+            self.terminations = self._convert_to_dict(
+                [True for _ in range(self.num_agents)]
+            )
+            self.rewards = self._convert_to_dict(
+                self._encode_rewards(agent_id == 1)
+            )
+        elif self._env.done:
+            self.terminations = self._convert_to_dict(
+                [True for _ in range(self.num_agents)]
+            )
+            self.rewards = self._convert_to_dict(
+                self._encode_rewards(agent_id == 0)
+            )
         next_player = self._agent_selector.next()
+        self.agent_selection = (
+            next_player if next_player else self._agent_selector.next()
+        )
+        self._accumulate_rewards()
 
     def render(self):
         return super().render()
