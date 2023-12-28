@@ -1,1 +1,1 @@
-from .amazons_env import AmazonsEnv
+from .amazons import env

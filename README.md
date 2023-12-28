@@ -13,11 +13,11 @@
 - [ ] Create both a simple command-line interaction mode and a GUI using Qt.
 - [ ] Train agents to play Amazons.
 
-## Dependencies
+## Requirements
 
-- CMake (my version is 3.28.1)
-- LibTorch 
-- Modern C++ Compiler (e.g., Visual Studio 2019 on Windows)
+- CMake
+
+
 
 ## Reference
 

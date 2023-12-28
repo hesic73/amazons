@@ -1,18 +1,26 @@
 from pettingzoo import AECEnv
-from pettingzoo.utils import agent_selector
+from pettingzoo.utils import agent_selector, wrappers
 from _amazons import Amazons
 import numpy as np
 import gymnasium.spaces as spaces
-from typing import Dict
+from typing import Dict, Optional
 
 
-class AmazonsEnv(AECEnv):
+def env(**kwargs):
+    env = raw_env(**kwargs)
+    env = wrappers.AssertOutOfBoundsWrapper(env)
+    env = wrappers.OrderEnforcingWrapper(env)
+    return env
+
+
+class raw_env(AECEnv):
     metadata = {
         "render_modes": [],
         "name": "amazons_v0",
     }
 
-    def __init__(self, board_size: int = 10):
+    def __init__(self, board_size: int = 10, render_mode: Optional[str] = None):
+        self.render_mode = render_mode
         assert 4 <= board_size <= 10
         self.board_size = board_size
         self._env = Amazons(board_size)
@@ -33,12 +41,8 @@ class AmazonsEnv(AECEnv):
         )
 
         self.action_spaces = self._convert_to_dict(
-            [spaces.Box(
-                low=0,
-                high=1,
-                shape=(board_size * board_size, 3),
-                dtype=np.int32,
-            ) for _ in range(self.num_agents)]
+            [spaces.MultiDiscrete([board_size, board_size, board_size, board_size,
+                                  board_size, board_size]) for _ in range(self.num_agents)]
         )
 
         self._agent_selector = agent_selector(self.agents)
@@ -128,11 +132,25 @@ class AmazonsEnv(AECEnv):
         )
         self._accumulate_rewards()
 
-    def render(self):
-        return super().render()
+        # if self.render_mode is not None:
+        #     self.render()
+
+    # def render(self):
+    #     if self.render_mode is None:
+    #         return
+    #     elif self.render_mode == 'ansi':
+    #         return self._env.string_repr()
+    #     else:
+    #         raise NotImplementedError()
 
     def close(self):
         return super().close()
 
     def _convert_to_dict(self, list_of_list):
         return dict(zip(self.possible_agents, list_of_list))
+
+    def random_action(self) -> np.ndarray:
+        return self._env.random_action()
+
+    def string_repr(self) -> str:
+        return self._env.string_repr()

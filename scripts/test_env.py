@@ -1,8 +1,22 @@
-from amazons_env import AmazonsEnv
+import amazons_env
 import numpy as np
-env = AmazonsEnv()
-obs: np.ndarray = env.observe("white_0")['observation']
-print(obs.shape)
-print(obs[..., 0].astype(np.int32))
-print(obs[..., 1].astype(np.int32))
-print(obs[..., 2].astype(np.int32))
+env = amazons_env.env()
+env.reset()
+
+cnt = 0
+for agent in env.agent_iter():
+    observation, reward, termination, truncation, info = env.last()
+
+    if termination or truncation:
+        action = None
+    else:
+        # this is where you would insert your policy
+        action = env.unwrapped.random_action()
+        print(action)
+
+    env.step(action)
+    cnt += 1
+
+print(cnt)
+print(env.unwrapped.string_repr())
+env.close()
