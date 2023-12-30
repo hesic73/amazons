@@ -1,5 +1,4 @@
 import amazons_env
-import numpy as np
 env = amazons_env.env()
 env.reset()
 
