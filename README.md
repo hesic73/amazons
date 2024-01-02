@@ -11,6 +11,8 @@ The **[Game of the Amazons](https://en.wikipedia.org/wiki/Game_of_the_Amazons)**
 
 ## amazons_env
 
+`amazons_env.raw_env` inherits from `pettingzoo.AECEnv`. As action masking is not implemented, it includes a `random_action` method to generate a random (valid) action. Note that  this method relies on brute force and can be computationally expensive.
+
 ```python
 import amazons_env
 env = amazons_env.env()
